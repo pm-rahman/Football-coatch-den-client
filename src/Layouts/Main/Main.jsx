@@ -6,7 +6,9 @@ const Main = () => {
     return (
         <div className="min-h-screen flex flex-col">
             <NavBar />
-            <Outlet />
+            <div className="mt-16">
+                <Outlet />
+            </div>
             <div className="mt-auto">
                 <Footer />
             </div>
