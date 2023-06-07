@@ -1,0 +1,45 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Icon } from '@iconify/react';
+import { Link } from "react-router-dom";
+
+const Login = () => {
+    const [showPassword, setShowPassword] = useState(false)
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
+    return (
+        <div className="w-1/3 mx-auto bg-slate-200 px-9 py-6 rounded my-16">
+            <h4 className="text-2xl font-semibold mb-2">Login!</h4>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-control w-full">
+                    <label className="label">
+                        <span className="label-text font-semibold">Your Email</span>
+                    </label>
+                    <input type="email" {...register("email", { required: true })} placeholder="Type Email" className="input input-bordered w-full" />
+                    {errors.email && <span className="text-red-500 mt-2">Email is required</span>}
+                </div>
+                <div className="form-control w-full">
+                    <label className="label">
+                        <span className="label-text font-semibold">Your Password</span>
+                    </label>
+                    <div className="relative">
+                        <input type={showPassword ? 'text' : 'password'} {...register("password", { required: true })} placeholder="Type Password" className="input input-bordered w-full" />
+                        <Icon onClick={() => setShowPassword(true)} className={`absolute right-3 top-[32%] text-slate-600 text-xl ${showPassword ? 'hidden' : 'block'}`} icon="fa-regular:eye" />
+                        <Icon onClick={() => setShowPassword(false)} className={`absolute right-3 top-[32%] text-slate-600 text-xl ${!showPassword ? 'hidden' : 'block'}`} icon="fa-regular:eye-slash" />
+                    </div>
+                    {errors.password && <span className="text-red-500 mt-2">Password is required</span>}
+                </div>
+                <input type="submit" value="Login" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
+            </form>
+            <p className="mt-1">I don't have account <Link to='/register' className="text-red-500 hover:underline">Register</Link></p>
+            <div className="divider"></div>
+            <div className="text-center">
+                <button className="btn btn-square py-3 font-semibold bg-blue-600 hover:bg-blue-700  text-white">
+                    <Icon icon="fa-brands:google" />
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default Login;

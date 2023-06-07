@@ -11,7 +11,7 @@ const NavBar = () => {
             <li><Link>User profile picture</Link></li>
             <li><Link>Logout</Link></li>
         </> : <>
-            <li><Link>Login</Link></li>
+            <li><Link to='/login'>Login</Link></li>
         </>}
     </>
     return (
