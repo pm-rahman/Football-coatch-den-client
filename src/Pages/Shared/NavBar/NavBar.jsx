@@ -5,7 +5,7 @@ const NavBar = () => {
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
-        <li><NavLink to='/classes'>Classes</NavLink></li>
+        <li><NavLink to='/allClasses'>Classes</NavLink></li>
         {user ? <>
             <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
             <li><NavLink to='/userProfile'>User profile picture</NavLink></li>
