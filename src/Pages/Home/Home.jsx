@@ -1,15 +1,15 @@
 import HomeBanner from "./HomeBanner/HomeBanner";
 import PopularClass from "./PopularClass/PopularClass";
+import PopularInstructors from "./PopularInstructors/PopularInstructors";
+import SuccessStories from "./SuccessStories/SuccessStories";
 
 const Home = () => {
     return (
         <div>
-            <HomeBanner/>
-            <div className="px-5 md:px-10 lg:px-20">
-                <div>
-                    <PopularClass/>
-                </div>
-            </div>
+            <HomeBanner />
+            <PopularClass />
+            <PopularInstructors />
+            <SuccessStories/>
         </div>
     );
 };
