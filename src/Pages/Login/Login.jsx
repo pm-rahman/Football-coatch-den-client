@@ -31,7 +31,7 @@ const Login = () => {
                 </div>
                 <input type="submit" value="Login" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
             </form>
-            <p className="mt-1">I don't have account <Link to='/register' className="text-red-500 hover:underline">Register</Link></p>
+            <p className="mt-1">I do not have account <Link to='/register' className="text-red-500 hover:underline">Register</Link></p>
             <div className="divider"></div>
             <div className="text-center">
                 <button className="btn btn-square py-3 font-semibold bg-blue-600 hover:bg-blue-700  text-white">
