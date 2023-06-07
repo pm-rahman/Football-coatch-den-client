@@ -1,6 +1,5 @@
 import Button from '../../../Components/Button/Button';
 import banner from '../../../assets/home/banner.svg';
-import { Icon } from '@iconify/react';
 import trainingImage from '../../../assets/home/training-image.png';
 const HomeBanner = () => {
     return (
@@ -13,7 +12,7 @@ const HomeBanner = () => {
                     <p className='text-justify mb-2'>The Football Coach's Den is the premier online resource for football training. Our team of experienced coaches and trainers can help you improve your skills, learn new techniques, and reach your full potential.</p>
                     <Button btnText='purchase classes' />
                 </div>
-                <div className='mt-12 hidden md:block lg:flex justify-end'>
+                <div className='mt-10 hidden md:block lg:flex justify-end'>
                     <img className='h-[450px]' src={trainingImage} alt="" />
                 </div>
             </div>
