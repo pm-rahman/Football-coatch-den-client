@@ -1,22 +1,26 @@
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
-    const user = null;
+    const user = true;
+    // TODO: is Admin loaded dynamic
+    const isAdmin = true;
+    // TODO : isInstructors
+    const isInstructors = false;
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
         {user ? <>
-            <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+            <li><NavLink to={isAdmin?'/dashboard/manageClasses':isInstructors?'/dashboard/myClasses':'/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
             <li><NavLink to='/userProfile'>User profile picture</NavLink></li>
-            <li><button>Logout</button></li>
+            <li><button className='pr-0' >Logout</button></li>
         </> : <>
-            <li><NavLink to='/login'>Login</NavLink></li>
+            <li><NavLink className='pr-0' to='/login'>Login</NavLink></li>
         </>}
     </>
     return (
-        <div className="navbar z-50 fixed px-5 md:px-10 lg:px-20 py-3 bg-[rgb(1,16,31)] text-white">
-            <div className="navbar-start">
+        <div className="navbar md:justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3 bg-[rgb(1,16,31)] text-white">
+            <div className="">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -25,9 +29,9 @@ const NavBar = () => {
                         {navLink}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-lg md:text-xl">The Football Coach's Den</Link>
+                <Link to='/' className="btn pl-0 btn-ghost normal-case text-lg md:text-xl">The Football Coach's Den</Link>
             </div>
-            <div className="navbar-end hidden lg:flex">
+            <div className="hidden lg:flex">
                 <ul className="menu menu-horizontal text-base uppercase px-1">
                     {navLink}
                 </ul>
