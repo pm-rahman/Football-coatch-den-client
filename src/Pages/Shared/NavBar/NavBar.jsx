@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const NavBar = () => {
-    const user = false;
+    const {user} = useContext(AuthContext);
     // TODO: is Admin loaded dynamic
     const isAdmin = false;
     // TODO : isInstructors
