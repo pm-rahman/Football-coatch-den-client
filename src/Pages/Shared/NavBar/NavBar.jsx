@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import useUserRole from "../../../hooks/useUserRole";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
-    // TODO: is Admin loaded dynamic
-    const isAdmin = true;
-    // TODO : isInstructors
-    const isInstructors = false;
+    const [role] = useUserRole();
 
     const handleLogOut = () => {
         logOut()
@@ -18,9 +17,9 @@ const NavBar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
-        {user ? <>
-            <li><NavLink to={isAdmin ? '/dashboard/manageClasses' : isInstructors ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
-            <li><button onClick={handleLogOut} className='lg:pl-6 pr-0' >Logout</button></li>
+        {role && user ? <>
+            <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
+            <li  onClick={handleLogOut} className='lg:pl-6 pr-0'>Logout</li>
         </> : <>
             <li><NavLink className='lg:pl-6 pr-2' to='/login'>Login</NavLink></li>
         </>}

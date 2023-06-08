@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
               localStorage.removeItem('jwt_token');  
             }
         })
-        return () => unsubscribe()
+        return () => unsubscribe();
     }, []);
     const logOut = () => {
         setLoading(true);

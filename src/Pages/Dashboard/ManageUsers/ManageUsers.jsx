@@ -15,9 +15,9 @@ const ManageUsers = () => {
             return res.data;
         }
     })
-    const handleMakeInstructor=(email)=>{
-        console.log(email)
-        axiosSecure.patch(`${import.meta.env.VITE_SERVER_API}/user/${email}`)
+    const handleMakeInstructor=(id)=>{
+        console.log(id)
+        axiosSecure.patch(`${import.meta.env.VITE_SERVER_API}/user/promote/${id}`)
         .then(res=>{
             console.log(res.data);
             refetch();
@@ -38,6 +38,7 @@ const ManageUsers = () => {
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th>Promote</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -48,12 +49,13 @@ const ManageUsers = () => {
                                         <th>{index + 1}</th>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>
+                                        <td>{user?.role?user.role:'user'}</td>
                                         <td>{user?.role
                                             ? <>
                                                 {user?.role === 'admin' ? 'admin' : 
-                                                <button className="btn bg-blue-600 hover:bg-blue-800 text-white text-sm">Make Admin</button>}
+                                                <button onClick={()=>handleMakeInstructor(user._id)} className="btn bg-blue-600 hover:bg-blue-800 text-white text-lg"><Icon icon="heroicons-outline:arrow-up" /></button>}
                                             </>
-                                            : <button onClick={()=>handleMakeInstructor(user.email)} className="btn bg-blue-600 hover:bg-blue-800 text-white text-sm">Make Instructor</button>}</td>
+                                            : <button onClick={()=>handleMakeInstructor(user._id)} className="btn bg-blue-600 hover:bg-blue-800 text-white text-sm"><Icon icon="heroicons-outline:arrow-up" /><Icon icon="heroicons-outline:arrow-up" /></button>}</td>
                                         <td><button disabled={user?.role==='admin'&&true} className="btn bg-red-600 hover:bg-red-800 text-white text-base"><Icon icon="heroicons-outline:trash" /></button></td>
                                     </tr>)}
                                 </tbody>
