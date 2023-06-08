@@ -1,21 +1,26 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import { Icon } from '@iconify/react';
 
 const NavBar = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     // TODO: is Admin loaded dynamic
     const isAdmin = false;
     // TODO : isInstructors
     const isInstructors = true;
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(() => { })
+    }
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
         {user ? <>
             <li><NavLink to={isAdmin ? '/dashboard/manageClasses' : isInstructors ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
-            <li><button className='lg:pl-6 pr-0' >Logout</button></li>
+            <li><button onClick={handleLogOut} className='lg:pl-6 pr-0' >Logout</button></li>
         </> : <>
             <li><NavLink className='lg:pl-6 pr-2' to='/login'>Login</NavLink></li>
         </>}
@@ -38,9 +43,11 @@ const NavBar = () => {
                     {navLink}
                 </ul>
             </div>
-            <div>
-                {user ?<NavLink to='/userProfile'><figure className="h-8 w-8 rounded-full overflow-hidden"><img title={user?.displayName} referrerPolicy="no-referrer" className="h-8" src={user?.photoURL} alt="" /></figure></NavLink>:<Icon icon="fa-solid:user-circle" />}
-            </div>
+            {user &&
+                <div>
+                    <NavLink to='/userProfile'><figure className="h-8 w-8 rounded-full overflow-hidden"><img title={user?.displayName} referrerPolicy="no-referrer" className="h-8" src={user?.photoURL} alt="" /></figure></NavLink>
+                </div>
+            }
         </div>
     );
 };

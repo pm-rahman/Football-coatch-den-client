@@ -1,12 +1,41 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Icon } from '@iconify/react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false)
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { signIn,googleSignIn } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const [confirmError, setConfirmError] = useState(false);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const naviGate = useNavigate();
+
+    const onSubmit = data => {
+        setConfirmError(false)
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                reset();
+                naviGate('/')
+                console.log(user);
+            })
+            .catch(error => {
+                console.log(error);
+                setConfirmError(error.message);
+            })
+        console.log(data);
+    }
+    const handleGoogleUser =()=>{
+        setConfirmError(false)
+        googleSignIn()
+        .then(result=>{
+            console.log(result.user)
+        })
+        .catch(error=>{
+            setConfirmError(error.message);
+        })
+    }
     return (
         <div className="w-1/3 mx-auto bg-slate-200 px-9 py-6 rounded my-16">
             <h4 className="text-2xl font-semibold mb-2">Login!</h4>
@@ -28,13 +57,14 @@ const Login = () => {
                         <Icon onClick={() => setShowPassword(false)} className={`absolute right-3 top-[32%] text-slate-600 text-xl ${!showPassword ? 'hidden' : 'block'}`} icon="fa-regular:eye-slash" />
                     </div>
                     {errors.password && <span className="text-red-500 mt-2">Password is required</span>}
+                    {confirmError && <span className="text-red-500 mt-2">{confirmError.split(' ')[2]}</span>}
                 </div>
                 <input type="submit" value="Login" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
             </form>
             <p className="mt-1">I do not have account <Link to='/register' className="text-red-500 hover:underline">Register</Link></p>
             <div className="divider"></div>
             <div className="text-center">
-                <button className="btn btn-square py-3 font-semibold bg-blue-600 hover:bg-blue-700  text-white">
+                <button onClick={handleGoogleUser} className="btn btn-square py-3 font-semibold bg-blue-600 hover:bg-blue-700  text-white">
                     <Icon icon="fa-brands:google" />
                 </button>
             </div>
