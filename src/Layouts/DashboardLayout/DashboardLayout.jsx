@@ -7,7 +7,7 @@ const DashboardLayout = () => {
     // TODO :  isAdmin will load dynamic
     const isAdmin = false;
     // TODO : isInstructors
-    const isInstructors = false;
+    const isInstructors = true;
     return (
         <div className="min-h-screen flex flex-col">
             <NavBar />

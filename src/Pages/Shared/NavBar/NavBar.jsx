@@ -1,11 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
-    const user = true;
+    const user = false;
     // TODO: is Admin loaded dynamic
     const isAdmin = false;
     // TODO : isInstructors
-    const isInstructors = false;
+    const isInstructors = true;
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
