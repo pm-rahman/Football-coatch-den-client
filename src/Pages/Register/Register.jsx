@@ -1,21 +1,41 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Icon } from '@iconify/react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
+    const { createUser,updateUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [ConfirmError, setConfirmError] = useState(false)
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+    const naviGate = useNavigate();
+
     const onSubmit = data => {
+        setConfirmError(false);
         const { password, confirmPassword } = data;
         console.log(password, confirmPassword);
-        if(password!==confirmPassword){
-            return setConfirmError(true);
+        if (password !== confirmPassword) {
+            return setConfirmError('Your password does not match');
         }
-        setConfirmError(false)
-        console.log(data);
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                updateUser(data.name,data.photoURL)
+                .then(()=>{})
+                .catch(error=>{
+                    setConfirmError(error.message);
+                })
+                // TODO : user will navigate in home
+                // reset();
+                // naviGate('/');
+                console.log(user);
+            })
+            .catch(error => {
+                setConfirmError(error.message)
+            })
     };
     return (
         <div className="w-2/4 mx-auto bg-slate-200 px-12 py-8 rounded my-16">
@@ -65,7 +85,7 @@ const Register = () => {
                         <Icon onClick={() => setShowConfirmPassword(false)} className={`absolute right-3 top-[32%] text-slate-600 text-xl ${!showConfirmPassword ? 'hidden' : 'block'}`} icon="fa-regular:eye-slash" />
                     </div>
                     {errors.confirmPassword && <span className="text-red-500 mt-2">Password is required</span>}
-                    {ConfirmError && <span className="text-red-500 mt-2">Your Password confirmation does not match</span>}
+                    {ConfirmError && <span className="text-red-500 mt-2">{ConfirmError}</span>}
                 </div>
                 <input type="submit" value="Register" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
             </form>
