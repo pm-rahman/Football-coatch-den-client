@@ -9,7 +9,7 @@ const PrivateRouter = ({ children }) => {
         return <div className="text-center mt-10"><span className="loading loading-ring loading-lg"></span></div>
     }
     if (user) {
-        return  children 
+        return children
     }
     else {
         return <Navigate to='/login' state={{ from: location }} replace ></Navigate>

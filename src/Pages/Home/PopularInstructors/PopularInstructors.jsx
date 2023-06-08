@@ -20,10 +20,9 @@ const PopularInstructors = () => {
                                 Instructors Name
                             </h2>
                             <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="flex justify-between">
-                                <div className="badge badge-outline">Classes Number</div>
-                                <div className="badge badge-outline">Student Number</div>
-                                <div className="badge badge-outline">Rating</div>
+                            <div className="flex justify-end gap-2">
+                                <div className="badge badge-outline hero-content">Classes Number</div>
+                                <div className="badge badge-outline hero-content">Student Number</div>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ const AdminRouter = ({ children }) => {
     if (loading && isAdminLoading) {
         return <div className="text-center mt-10"><span className="loading loading-ring loading-lg"></span></div>
     }
-    if (user && isAdmin) {
+    if (user || isAdmin) {
         return children
     }
     else {

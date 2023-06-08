@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useUserRole from "../../../hooks/useUserRole";
-import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -17,9 +16,9 @@ const NavBar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
-        {role && user ? <>
+        {user ? <>
             <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
-            <li  onClick={handleLogOut} className='lg:pl-6 pr-0'>Logout</li>
+            <li  onClick={handleLogOut} className='pl-3 text-sm lg:pl-6 pr-2'>Logout</li>
         </> : <>
             <li><NavLink className='lg:pl-6 pr-2' to='/login'>Login</NavLink></li>
         </>}

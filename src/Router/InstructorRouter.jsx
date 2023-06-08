@@ -9,7 +9,7 @@ const InstructorRouter = ({ children }) => {
     if (loading && isInstructorLoading) {
         return <div className="text-center mt-10"><span className="loading loading-ring loading-lg"></span></div>
     }
-    if (user && isInstructor) {
+    if (user || isInstructor) {
         return children
     }
     else {
