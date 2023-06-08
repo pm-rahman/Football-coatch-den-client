@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { Icon } from '@iconify/react';
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
-    const { createUser,updateUser,googleSignIn } = useContext(AuthContext);
+    const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [ConfirmError, setConfirmError] = useState(false)
@@ -16,37 +18,80 @@ const Register = () => {
     const onSubmit = data => {
         setConfirmError(false);
         const { password, confirmPassword } = data;
-        console.log(password, confirmPassword);
         if (password !== confirmPassword) {
             return setConfirmError('Your password does not match');
         }
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                updateUser(data.name,data.photoURL)
-                .then(()=>{})
-                .catch(error=>{
-                    setConfirmError(error.message);
-                })
-                // TODO : user will navigate in home
-                reset();
-                naviGate('/');
-                console.log(user);
+                updateUser(data.name, data.photoURL)
+                    .then(() => {
+                        reset();
+                        const loggedUser = {
+                            name: user?.displayName,
+                            email: user?.email,
+                            photo: user?.photoURL
+                        }
+                        axios.put(`${import.meta.env.VITE_SERVER_API}/user`, loggedUser)
+                            .then((data) => {
+                                if (data.data.upsertedCount > 0) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Your Profile has been Created',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                }
+                                naviGate('/');
+                            })
+                        console.log('from register page', user);
+                    })
+                    .catch(error => {
+                        setConfirmError(error.message);
+                    })
+
             })
             .catch(error => {
                 setConfirmError(error.message)
             })
     };
-    const handlerGoogleUser = ()=>{
+    const handlerGoogleUser = () => {
         setConfirmError(false)
         googleSignIn()
-        .then((result)=>{
-            // TODO: console will remove
-            console.log(result.user);
-        })
-        .catch(error=>{
-            setConfirmError(error.message);
-        })
+            .then((result) => {
+                const user = result.user;
+                const loggedUser = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    photo: user?.photoURL
+                }
+                axios.put(`${import.meta.env.VITE_SERVER_API}/user`, loggedUser)
+                    .then((data) => {
+                        if (data.data.upsertedCount > 0) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your Profile has been Created',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Login Successful',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                        naviGate('/')
+                    })
+            })
+            .catch(error => {
+                setConfirmError(error.message);
+            })
     }
     return (
         <div className="w-2/4 mx-auto bg-slate-200 px-12 py-8 rounded my-16">
@@ -96,7 +141,7 @@ const Register = () => {
                         <Icon onClick={() => setShowConfirmPassword(false)} className={`absolute right-3 top-[32%] text-slate-600 text-xl ${!showConfirmPassword ? 'hidden' : 'block'}`} icon="fa-regular:eye-slash" />
                     </div>
                     {errors.confirmPassword && <span className="text-red-500 mt-2">Password is required</span>}
-                    {ConfirmError && <span className="text-red-500 mt-2">{ConfirmError.split(' ')[2]}</span>}
+                    {ConfirmError && <span className="text-red-500 mt-2">{ConfirmError}</span>}
                 </div>
                 <input type="submit" value="Register" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
             </form>

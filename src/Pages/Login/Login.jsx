@@ -3,42 +3,73 @@ import { useForm } from "react-hook-form";
 import { Icon } from '@iconify/react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const { signIn,googleSignIn } = useContext(AuthContext);
+    const { signIn, googleSignIn } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [confirmError, setConfirmError] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const naviGate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-    console.log(from);
 
     const onSubmit = data => {
         setConfirmError(false)
         signIn(data.email, data.password)
-            .then(result => {
-                const user = result.user;
+            .then(() => {
                 reset();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Login Successful',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 naviGate(from);
-                console.log(user);
             })
             .catch(error => {
-                console.log(error);
                 setConfirmError(error.message);
             })
         console.log(data);
     }
-    const handleGoogleUser =()=>{
+    const handleGoogleUser = () => {
         setConfirmError(false)
         googleSignIn()
-        .then(result=>{
-            console.log(result.user);
-            naviGate(from);
-        })
-        .catch(error=>{
-            setConfirmError(error.message);
-        })
+            .then(result => {
+                const user = result.user;
+                const loggedUser = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    photo: user?.photoURL
+                }
+                axios.put(`${import.meta.env.VITE_SERVER_API}/user`, loggedUser)
+                    .then((data) => {
+                        if (data.data.upsertedCount > 0) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your Profile has been Created',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Login Successful',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    })
+                naviGate(from);
+            })
+            .catch(error => {
+                setConfirmError(error.message);
+            })
     }
     return (
         <div className="w-1/3 mx-auto bg-slate-200 px-9 py-6 rounded my-16">
@@ -61,7 +92,7 @@ const Login = () => {
                         <Icon onClick={() => setShowPassword(false)} className={`absolute right-3 top-[32%] text-slate-600 text-xl ${!showPassword ? 'hidden' : 'block'}`} icon="fa-regular:eye-slash" />
                     </div>
                     {errors.password && <span className="text-red-500 mt-2">Password is required</span>}
-                    {confirmError && <span className="text-red-500 mt-2">{confirmError.split(' ')[2]}</span>}
+                    {confirmError && <span className="text-red-500 mt-2">{confirmError}</span>}
                 </div>
                 <input type="submit" value="Login" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
             </form>

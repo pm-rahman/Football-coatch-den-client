@@ -5,9 +5,9 @@ import { Icon } from '@iconify/react';
 
 const DashboardLayout = () => {
     // TODO :  isAdmin will load dynamic
-    const isAdmin = false;
+    const isAdmin = true;
     // TODO : isInstructors
-    const isInstructors = true;
+    const isInstructors = false;
     return (
         <div className="min-h-screen flex flex-col">
             <NavBar />

@@ -5,9 +5,9 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     // TODO: is Admin loaded dynamic
-    const isAdmin = false;
+    const isAdmin = true;
     // TODO : isInstructors
-    const isInstructors = true;
+    const isInstructors = false;
 
     const handleLogOut = () => {
         logOut()
