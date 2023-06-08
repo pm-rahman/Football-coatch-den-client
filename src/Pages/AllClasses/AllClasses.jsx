@@ -15,7 +15,7 @@ const AllClasses = () => {
                         key={index}
                         className="shadow-lg rounded-md"
                     >
-                        <figure><img className="h-60" src="https://www.teambath.com/wp-content/uploads/2023/04/Scotland-Women-Football-040424_3-scaled.jpg" alt="Thumbnail" /></figure>
+                        <figure className="h-60 overflow-hidden"><img className="w-full mx-auto" src="https://www.teambath.com/wp-content/uploads/2023/04/Scotland-Women-Football-040424_3-scaled.jpg" alt="Thumbnail" /></figure>
                         <div className="p-5">
                             <h2 className="pb-1 font-semibold text-xl">
                                 Classes name

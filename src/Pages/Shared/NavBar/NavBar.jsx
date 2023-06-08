@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 const NavBar = () => {
     const user = true;
     // TODO: is Admin loaded dynamic
-    const isAdmin = true;
+    const isAdmin = false;
     // TODO : isInstructors
     const isInstructors = false;
     const navLink = <>

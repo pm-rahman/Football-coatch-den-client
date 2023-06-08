@@ -15,7 +15,7 @@ const DashboardLayout = () => {
                 <div className="pr-5 md:pr-10 lg:pr-20">
                     <div className="drawer lg:drawer-open">
                         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content h-screen flex flex-col mt-6 ml-6">
+                        <div className="drawer-content h-screen flex flex-col mt-14 ml-14">
                             {/* Page content here */}
                             <Outlet />
                             <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
