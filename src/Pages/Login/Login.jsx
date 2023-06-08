@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Icon } from '@iconify/react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Login = () => {
@@ -10,6 +10,9 @@ const Login = () => {
     const [confirmError, setConfirmError] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const naviGate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    console.log(from);
 
     const onSubmit = data => {
         setConfirmError(false)
@@ -17,7 +20,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 reset();
-                naviGate('/')
+                naviGate(from);
                 console.log(user);
             })
             .catch(error => {
@@ -30,7 +33,8 @@ const Login = () => {
         setConfirmError(false)
         googleSignIn()
         .then(result=>{
-            console.log(result.user)
+            console.log(result.user);
+            naviGate(from);
         })
         .catch(error=>{
             setConfirmError(error.message);
