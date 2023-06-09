@@ -17,6 +17,7 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import PrivateRouter from "./PrivateRouter";
 import InstructorRouter from "./InstructorRouter";
 import AdminRouter from "./AdminRouter";
+import EditClass from "../Pages/Dashboard/EditClass/EditClass";
 
 const Router = createBrowserRouter([
     {
@@ -37,7 +38,8 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/instructors',
-                element: <Instructors />
+                element: <Instructors />,
+                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/instructor`)
             },
             {
                 path: '/instructorClasses',
@@ -45,7 +47,8 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/allClasses',
-                element: <AllClasses />
+                element: <AllClasses />,
+                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/classes`)
             }
         ]
     },
@@ -66,10 +69,14 @@ const Router = createBrowserRouter([
                 element: <PaymentHistory/>
             },
             // instructor
-            
             {
                 path:'addClasses',
                 element:<InstructorRouter><AddClass/></InstructorRouter>
+            },
+            {
+                path:'editClasses/:id',
+                element:<InstructorRouter><EditClass/></InstructorRouter>,
+                loader: ({params})=>fetch(`${import.meta.env.VITE_SERVER_API}/class/${params.id}`)
             },
             {
                 path:'myClasses',
@@ -78,7 +85,8 @@ const Router = createBrowserRouter([
             // admin router
             {
                 path:'manageClasses',
-                element:<AdminRouter><ManageClasses/></AdminRouter>
+                element:<AdminRouter><ManageClasses/></AdminRouter>,
+                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/classes`)
             },
             {
                 path:'manageUsers',

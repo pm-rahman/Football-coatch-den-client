@@ -4,12 +4,12 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 const AddClass = () => {
+    const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
     const [imageName, setImageName] = useState('Upload Class Image');
     const [image, setImage] = useState(null);
     const [imageError, setImageError] = useState(false);
     const [imageUploading, setImageUploading] = useState(false);
-    const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         setImageError(false);

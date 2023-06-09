@@ -18,7 +18,7 @@ const NavBar = () => {
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
         {user ? <>
             <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
-            <li  onClick={handleLogOut} className='pl-3 text-sm lg:pl-6 pr-2'>Logout</li>
+            <li onClick={handleLogOut} className='pl-3 cursor-pointer text-sm lg:pl-6 pr-2'>Logout</li>
         </> : <>
             <li><NavLink className='lg:pl-6 pr-2' to='/login'>Login</NavLink></li>
         </>}
@@ -43,7 +43,7 @@ const NavBar = () => {
             </div>
             {user &&
                 <div>
-                    <NavLink to='/userProfile'><figure className="h-8 w-8 rounded-full overflow-hidden"><img title={user?.displayName} referrerPolicy="no-referrer" className="h-8" src={user?.photoURL} alt="" /></figure></NavLink>
+                    <figure className="h-8 w-8 cursor-pointer rounded-full overflow-hidden"><img title={user?.displayName} referrerPolicy="no-referrer" className="h-8" src={user?.photoURL} alt="" /></figure>
                 </div>
             }
         </div>

@@ -12,18 +12,18 @@ const DashboardLayout = () => {
         <div className="min-h-screen flex flex-col">
             <NavBar />
             <div className="mt-[70px] lg:mt-20">
-                <div className="pr-5 md:pr-10 lg:pr-20">
+                <div className="mr-5 md:mr-10 lg:mr-20">
                     <div className="drawer lg:drawer-open">
                         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content flex flex-col my-10 ml-12">
+                        <div className="drawer-content w-2/2 overflow-hidden flex flex-col my-10 ml-12">
                             {/* Page content here */}
                             <Outlet />
                             <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
                         </div>
-                        <div className="drawer-side">
+                        <div className="drawer-side w-1/4 h-full">
                             <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                            <ul className="menu text-base uppercase font-semibold p-4 w-80 h-full mt-[70px] lg:mt-0 bg-base-200 text-base-content">
+                            <ul className="menu text-base uppercase font-semibold p-4 w-full h-full mt-[70px] lg:mt-0 bg-base-200 text-base-content">
                                 {isAdmin ? <>
                                     <li><NavLink to='/dashboard/manageClasses'><Icon icon="iwwa:settings" />Manage Classes</NavLink></li>
                                     <li><NavLink to='/dashboard/manageUsers'><Icon icon="fa-solid:user-cog" />Manage Users</NavLink></li>
