@@ -29,7 +29,7 @@ const ManageUsers = () => {
                 users && users.length > 0 ? <>
                     <h2 className="text-3xl uppercase font-semibold">Mange Your Selected Classes</h2>
                     <div>
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto mb-4">
                             <table className="table">
                                 {/* head */}
                                 <thead>

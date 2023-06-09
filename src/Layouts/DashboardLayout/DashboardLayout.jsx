@@ -15,7 +15,7 @@ const DashboardLayout = () => {
                 <div className="pr-5 md:pr-10 lg:pr-20">
                     <div className="drawer lg:drawer-open">
                         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content flex flex-col mt-10 ml-12">
+                        <div className="drawer-content flex flex-col my-10 ml-12">
                             {/* Page content here */}
                             <Outlet />
                             <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
@@ -30,8 +30,8 @@ const DashboardLayout = () => {
                                 </> : <>
                                     {
                                         isInstructor ? <>
-                                            <li><NavLink to='/dashboard/addClasses'><Icon icon="fa-solid:book-medical" /> Add a Class</NavLink></li>
                                             <li><NavLink to='/dashboard/myClasses'><Icon icon="fa-solid:book" /> My Classes</NavLink></li>
+                                            <li><NavLink to='/dashboard/addClasses'><Icon icon="fa-solid:book-medical" /> Add a Class</NavLink></li>
                                         </> : <>
                                             <li><NavLink to='/dashboard/mySelectedClasses'><Icon icon="fa-regular:bookmark" /> My Selected Classes</NavLink></li>
                                             <li><NavLink to='/dashboard/myEnrolledClasses'><Icon icon="entypo:book" /> My Enrolled Classes</NavLink></li>

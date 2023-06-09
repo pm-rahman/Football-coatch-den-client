@@ -2,14 +2,14 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+const axiosSecure = axios.create({
+    baseURL: `${import.meta.env.VITE_SERVER_API}`
+})
 const useAxiosSecure = () => {
     const { logOut } = useContext(AuthContext);
     const naviGate = useNavigate();
 
-    const axiosSecure = axios.create({
-        baseURL: `${import.meta.env.VITE_SERVER_API}`
-    })
+
     useEffect(() => {
         axiosSecure.interceptors.request.use(config => {
             const token = localStorage.getItem('jwt_token');
@@ -27,7 +27,7 @@ const useAxiosSecure = () => {
                 return Promise.reject(error);
             }
         )
-    }, [axiosSecure, logOut, naviGate])
+    }, [ logOut, naviGate])
     return [axiosSecure];
 }
 export default useAxiosSecure;
