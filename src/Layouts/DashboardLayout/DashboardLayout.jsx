@@ -21,7 +21,7 @@ const DashboardLayout = () => {
                             <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
                         </div>
-                        <div className="drawer-side w-1/4 h-full">
+                        <div className="drawer-side w-1/4 min-h-full">
                             <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                             <ul className="menu text-base uppercase font-semibold p-4 w-full h-full mt-[70px] lg:mt-0 bg-base-200 text-base-content">
                                 {isAdmin ? <>

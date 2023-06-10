@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const AddClass = () => {
     const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
@@ -10,7 +11,10 @@ const AddClass = () => {
     const [image, setImage] = useState(null);
     const [imageError, setImageError] = useState(false);
     const [imageUploading, setImageUploading] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+ 
+    const naviGate = useNavigate()
+    
     const onSubmit = data => {
         setImageError(false);
         if (!image) {
@@ -30,7 +34,6 @@ const AddClass = () => {
 
         axiosSecure.post(`/class/${user?.email}`, newClass)
             .then(res => {
-                // console.log(res.data);
                 if (res.data.acknowledged) {
                     Swal.fire({
                         position: 'top-end',
@@ -39,6 +42,8 @@ const AddClass = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    reset()
+                    naviGate('/dashboard/myClasses')
                 }
             })
 

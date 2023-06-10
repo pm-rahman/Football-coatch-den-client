@@ -1,7 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import EmptyPage from "../../Components/EmptyPage/EmptyPage";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
-import Button from "../../Components/Button/Button";
 
 const Instructors = () => {
     const instructors = useLoaderData();
@@ -24,8 +23,6 @@ const Instructors = () => {
                                 <div className="p-4">
                                     <h2 className="card-title uppercase">{instructor.name}</h2>
                                     <p>Email : {instructor.email}</p>
-                                    <p className="mb-2">Number Of Class : {instructor.email}</p>
-                                    <Button btnText='all classes' full={true} />
                                 </div>
                             </div>
                             )

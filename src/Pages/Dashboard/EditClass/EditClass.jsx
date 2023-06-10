@@ -3,13 +3,16 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 const EditClass = () => {
     const { user } = useContext(AuthContext);
     const {_id,className,seats,price} = useLoaderData();
 
     const [axiosSecure] = useAxiosSecure();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+
+    const naviGate = useNavigate();
+
     const onSubmit = data => {
         const UpdateClass = {
             instructorEmail: user?.email,
@@ -29,6 +32,8 @@ const EditClass = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    naviGate('/dashboard/myClasses');
+                    reset();
                 }
             })
 

@@ -4,11 +4,23 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import EmptyPage from "../../../Components/EmptyPage/EmptyPage";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import Modal from 'react-modal';
 
-
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 const MyClasses = () => {
-    const { user } = useContext(AuthContext);
+    const { user, modalIsOpen, setIsOpen } = useContext(AuthContext);
+    const [feedback, setFeedback] = useState('');
+
     const [axiosSecure] = useAxiosSecure();
     const [myClasses, setMyClasses] = useState([]);
     useEffect(() => {
@@ -18,50 +30,71 @@ const MyClasses = () => {
             })
     }, [axiosSecure, user?.email]);
 
+    const showFeedbackHandler = feedbackMessage => {
+        setIsOpen(true);
+        setFeedback(feedbackMessage)
+    }
+
     return (
         <>
             {
                 myClasses && myClasses.length > 0 ? <>
                     <h2 className="text-3xl uppercase font-semibold mb-4">Your Added Classes</h2>
-                    <div className="grid grid-cols-3 gap-5">
-                        {
-                            myClasses.map((item, index) => <div
-                                key={index}
-                                className="shadow-lg rounded-md capitalize"
-                            >
-                                <figure className="h-40 overflow-hidden"><img className="w-full mx-auto" src={item.classImage} alt="Thumbnail" /></figure>
-                                <div className="p-4">
-                                    <h2 className="card-title uppercase">{item.className}</h2>
-                                    <p>Available Seats {item.seats}</p>
-                                    <p>price : ${item.price}</p>
-                                    <div className="flex justify-between mb-3">
-                                        <div>
-                                            <p>Status : <span className={`font-semibold ${item.status === 'denied'?'text-red-600' 
-                                            : item.status === 'approved'?'text-green-600':''}`}>{item.status}</span></p>
-                                            <p>Enrolled : {item.enrolled ? item.enrolled : 0}</p>
-                                        </div>
-                                        <Link to={`/dashboard/editClasses/${item._id}`} className="btn bg-blue-600 hover:bg-blue-800 text-white text-sm"><Icon icon="fa-regular:edit" /></Link>
-                                    </div>
-
-                                    <div>{item.feedback ?
-                                        <div tabIndex={0} className="collapse bg-base-200">
-                                            <div className="btn">
-                                                Feedback
-                                            </div>
-                                            <div className="collapse-content font-normal">
-                                                <p className="max-h-40 overflow-y-scroll">{item?.feedback}</p>
-                                            </div>
-                                        </div>
-                                        : 'No Feedback'}</div>
-                                </div>
-                            </div>
-                            )
-                        }
+                    <div className="overflow-x-auto mb-4">
+                        <table className="table capitalize">
+                            {/* head */}
+                            <thead>
+                                <tr className="font-semibold text-sm">
+                                    <th>#</th>
+                                    <th>Class Name</th>
+                                    <th>Available Seats</th>
+                                    <th className="text-right">Price</th>
+                                    <th className="text-right">Enrolled</th>
+                                    <th>Status</th>
+                                    <th>Feedback</th>
+                                    <th>update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {myClasses.map((item, index) => <tr
+                                    key={index}
+                                >
+                                    <th>{index + 1}</th>
+                                    <td>{item.className}</td>
+                                    <td>{item.seats}</td>
+                                    <td className="text-right">${item.price}</td>
+                                    <td className="text-right">{item.enrolled ? item.enrolled : 0}</td>
+                                    <td className={`font-semibold ${item.status === 'denied' ? 'text-red-600'
+                                        : item.status === 'approved' ? 'text-green-600' : ''}`}>{item.status ? item.status : 'pending'}</td>
+                                    <td>{item.feedback ? <button onClick={() => showFeedbackHandler(item.feedback)} className="btn bg-[rgba(1,16,31,.9)] hover:bg-[rgb(1,16,31)] text-white">Feedback</button> : 'no feedback'}</td>
+                                    <td><Link to={`/dashboard/editClasses/${item._id}`} className="btn bg-[rgba(1,16,31,.9)] hover:bg-[rgb(1,16,31)] text-white text-sm"><Icon icon="fa-regular:edit" /></Link></td>
+                                </tr>)}
+                            </tbody>
+                        </table>
                     </div>
                 </> : <>
-                    <EmptyPage emptyText="You can add class for your own" />
+                    <EmptyPage emptyText="You Have No Added Classes" />
                 </>
             }
+            <div>
+
+                <Modal
+                    isOpen={modalIsOpen}
+                    ariaHideApp={false}
+                    onRequestClose={() => setIsOpen(false)}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div className="md:w-[450px]">
+                        <h2 className="text-2xl font-semibold">Hello!</h2>
+                        <div>{feedback}</div>
+                        <div className="flex justify-end gap-1">
+                            <button className="btn text-white bg-[rgba(1,16,31,.9)] hover:bg-[rgb(1,16,31)]" onClick={() => setIsOpen(false)}><Icon className="text-lg" icon="heroicons-solid:check" /></button>
+                            <button className="btn bg-red-500 text-white hover:bg-red-700" onClick={() => setIsOpen(false)}><Icon className="text-lg" icon="heroicons-outline:x" /></button>
+                            </div>
+                    </div>
+                </Modal>
+            </div>
         </>
     );
 };

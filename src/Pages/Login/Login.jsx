@@ -32,7 +32,6 @@ const Login = () => {
             .catch(error => {
                 setConfirmError(error.message);
             })
-        console.log(data);
     }
     const handleGoogleUser = () => {
         setConfirmError(false)

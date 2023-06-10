@@ -18,6 +18,7 @@ import PrivateRouter from "./PrivateRouter";
 import InstructorRouter from "./InstructorRouter";
 import AdminRouter from "./AdminRouter";
 import EditClass from "../Pages/Dashboard/EditClass/EditClass";
+import SendFeedback from "../Pages/Dashboard/ManageClasses/SendFeedback";
 
 const Router = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ const Router = createBrowserRouter([
             {
                 path: '/instructors',
                 element: <Instructors />,
-                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/instructor`)
+                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/instructors`)
             },
             {
                 path: '/instructorClasses',
@@ -47,8 +48,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/allClasses',
-                element: <AllClasses />,
-                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/classes`)
+                element: <AllClasses />
             }
         ]
     },
@@ -85,8 +85,11 @@ const Router = createBrowserRouter([
             // admin router
             {
                 path:'manageClasses',
-                element:<AdminRouter><ManageClasses/></AdminRouter>,
-                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/classes`)
+                element:<AdminRouter><ManageClasses/></AdminRouter>
+            },
+            {
+                path:'sendFeedback/:id',
+                element:<SendFeedback/>
             },
             {
                 path:'manageUsers',
