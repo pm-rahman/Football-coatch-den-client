@@ -26,7 +26,6 @@ const SendFeedback = () => {
     const onSubmit = (data) => {
         axiosSecure.patch(`/updateFeedback/${id}`,data)
         .then(res=>{
-            console.log(res.data);
             if(res.data.modifiedCount>0){
                 Swal.fire({
                     position: 'top-end',

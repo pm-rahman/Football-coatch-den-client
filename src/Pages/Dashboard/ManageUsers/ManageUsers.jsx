@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import EmptyPage from "../../../Components/EmptyPage/EmptyPage";
-import { Icon } from "@iconify/react";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -73,8 +72,8 @@ const ManageUsers = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user?.role ? user.role : 'Student'}</td>
-                                    <td><button disabled={user.role} onClick={() => handleMakeInstructor(user._id)} className="btn bg-blue-600 hover:bg-blue-800 text-white text-sm"><Icon icon="heroicons-outline:arrow-up" /></button></td>
-                                    <td><button disabled={user.role && user.role === 'admin'} onClick={() => handleMakeAdmin(user._id)} className="btn bg-blue-600 hover:bg-blue-800 text-white text-sm"><Icon icon="heroicons-outline:arrow-up" /><Icon icon="heroicons-outline:arrow-up" /></button></td>
+                                    <td><button disabled={user.role} onClick={() => handleMakeInstructor(user._id)} className="btn bg-[rgba(1,16,31,.9)] hover:bg-[rgb(1,16,31)] text-white text-sm">Make Instructor</button></td>
+                                    <td><button disabled={user.role && user.role === 'admin'} onClick={() => handleMakeAdmin(user._id)} className="btn bg-[rgba(1,16,31,.9)] hover:bg-[rgb(1,16,31)] text-white text-sm">Make Admin</button></td>
                                 </tr>)}
                             </tbody>
                         </table>

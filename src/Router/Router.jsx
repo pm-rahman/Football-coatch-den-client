@@ -20,6 +20,8 @@ import AdminRouter from "./AdminRouter";
 import EditClass from "../Pages/Dashboard/EditClass/EditClass";
 import SendFeedback from "../Pages/Dashboard/ManageClasses/SendFeedback";
 import PaymentPage from "../Pages/Dashboard/PaymentPage/PaymentPage";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import StudentRouter from "./StudentRouter";
 
 const Router = createBrowserRouter([
     {
@@ -59,19 +61,19 @@ const Router = createBrowserRouter([
         children: [
             {
                 path: 'mySelectedClasses',
-                element: <MySelectedClasses />
+                element: <StudentRouter><MySelectedClasses /></StudentRouter>
             },
             {
                 path: 'myEnrolledClasses',
-                element: <MyEnrolledClasses />
+                element: <StudentRouter><MyEnrolledClasses /></StudentRouter>
             },
             {
                 path: 'paymentHistory',
-                element: <PaymentHistory />
+                element: <StudentRouter><PaymentHistory /></StudentRouter>
             },
             {
                 path:'paymentPage',
-                element:<PaymentPage/>
+                element:<StudentRouter><PaymentPage/></StudentRouter>
             },
             // instructor
             {
@@ -101,6 +103,10 @@ const Router = createBrowserRouter([
                 element: <AdminRouter><ManageUsers /></AdminRouter>
             }
         ]
+    },
+    {
+        path:'*',
+        element:<ErrorPage/>
     }
 ])
 export default Router;

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Icon } from '@iconify/react';
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Footer = () => {
+    const {dark} = useContext(AuthContext);
     return (
-        <div className="px-5 md:px-10 lg:px-20 py-10 bg-[rgba(1,16,31,.9)] text-white">
+        <div className={`px-5 md:px-10 lg:px-20 py-10 ${!dark?'bg-[rgba(1,16,31,.9)] text-white':'bg-[rgba(1,16,31,.1)]'}`}>
             <footer className="footer py-4">
                 <div>
                     <Link to='/' className="text-lg md:text-xl font-semibold mb-6">The Football Coach's Den</Link>

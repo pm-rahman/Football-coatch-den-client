@@ -49,7 +49,7 @@ const MyClasses = () => {
                                     <th>Class Name</th>
                                     <th>Available Seats</th>
                                     <th className="text-right">Price</th>
-                                    <th className="text-right">Enrolled</th>
+                                    <th className="text-right">Total Students</th>
                                     <th>Status</th>
                                     <th>Feedback</th>
                                     <th>update</th>

@@ -7,6 +7,7 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [dark, setDark] = useState(false)
     const [paymentClass,setPaymentClass] = useState(null)
     const [loading, setLoading] = useState(true);
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -71,7 +72,9 @@ const AuthProvider = ({ children }) => {
         modalIsOpen,
         loading,
         paymentClass,
-        setPaymentClass
+        setPaymentClass,
+        dark,
+        setDark
     }
     return (
         <AuthContext.Provider value={userInfo}>

@@ -1,11 +1,13 @@
+import moment from "moment/moment";
 import EmptyPage from "../../../Components/EmptyPage/EmptyPage";
+import usePayment from "../../../hooks/usePayment";
 
 const PaymentHistory = () => {
-    const payments = [{},{}]
+    const [enrollClass] = usePayment();
     return (
         <>
             {
-                payments && payments.length > 0 ? <>
+                enrollClass && enrollClass.length > 0 ? <>
                     <h2 className="text-3xl uppercase font-semibold">Mange Your Selected Classes</h2>
                     <div>
                         <div className="overflow-x-auto">
@@ -15,18 +17,18 @@ const PaymentHistory = () => {
                                     <tr className="font-semibold text-sm">
                                         <th>#</th>
                                         <th>classes</th>
-                                        <th>Amount</th>
+                                        <th className="text-end">Amount</th>
                                         <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {payments.map((item, index) => <tr
+                                    {enrollClass.map((item, index) => <tr
                                         key={index}
                                     >
                                         <th>{index + 1}</th>
-                                        <td>Class Name</td>
-                                        <td className="text-right">$100</td>
-                                        <td>10/11/2023</td>
+                                        <td>{item.className}</td>
+                                        <td className="text-right">${item.amount}</td>
+                                        <td>{moment(item.date).format()} {}</td>
                                     </tr>)}
                                 </tbody>
                             </table>

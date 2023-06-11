@@ -40,7 +40,7 @@ const AllClasses = () => {
             className:item.className,
             classImage:item.classImage,
             instructorName:item.instructorName,
-            instructorEmail:item.email
+            instructorEmail:item.instructorEmail
         }
         axiosSecure.put(`/selectedByUser/${user?.email}`, userInfo)
             .then(res => {
@@ -59,8 +59,8 @@ const AllClasses = () => {
                 else{
                     Swal.fire({
                         position: 'top-end',
-                        icon: 'success',
-                        title: 'You Already Select This Class',
+                        icon: 'error',
+                        title: 'You Have been selected before',
                         showConfirmButton: false,
                         timer: 1500
                     })

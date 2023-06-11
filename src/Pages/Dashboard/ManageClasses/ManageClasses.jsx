@@ -22,7 +22,6 @@ const ManageClasses = () => {
     const handleStatus = (id, status) => {
         axiosSecure.patch(`/updateStatus/${id}`, { status })
             .then(res => {
-                console.log(res.data);
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         position: 'top-end',
@@ -47,8 +46,8 @@ const ManageClasses = () => {
                                 <thead>
                                     <tr className="font-semibold text-sm">
                                         <th>#</th>
-                                        <th> Class Name</th>
                                         <th>Class Image</th>
+                                        <th> Class Name</th>
                                         <th>Instructor Name</th>
                                         <th>Instructor Email</th>
                                         <th className="text-right">Available seats</th>
@@ -64,8 +63,8 @@ const ManageClasses = () => {
                                         key={index}
                                     >
                                         <th>{index + 1}</th>
-                                        <td>{item.className}</td>
                                         <td><img className="w-20" src={item.classImage} alt="" /></td>
+                                        <td>{item.className}</td>
                                         <td>{item.instructorName}</td>
                                         <td>{item.instructorEmail}</td>
                                         <td className="text-right">{item.seats}</td>

@@ -19,7 +19,6 @@ const CheckoutForm = ({ paymentClass }) => {
     if (paymentClass?.price > 0) {
       axiosSecure.post('/createPaymentIntent', { price: paymentClass.price })
         .then(res => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         })
     }
@@ -39,7 +38,6 @@ const CheckoutForm = ({ paymentClass }) => {
     if (card === null) {
       return;
     }
-    console.log('card', card)
     const { error } = await stripe.createPaymentMethod({
       type: 'card',
       card,
@@ -65,17 +63,20 @@ const CheckoutForm = ({ paymentClass }) => {
       },
     );
     if (confirmError) {
-      console.log(confirmError)
+      setCardError(confirmError)
     }
     if (paymentIntent?.status === 'succeeded') {
       setProcessing(false)
-      console.log('console payment intent', paymentIntent);
-      const transactionId = paymentIntent.id;
+      // console.log('console payment intent', paymentIntent);
 
       const paymentInfo = {
         id: paymentClass.id,
+        transactionId:paymentIntent.id,
         email: user?.email,
         name: user?.displayName,
+        classImage:paymentClass.classImage,
+        instructorName:paymentClass.instructorName,
+        seats:paymentClass.seats,
         amount: paymentClass.price,
         className: paymentClass.className,
         date: new Date()
@@ -100,13 +101,18 @@ const CheckoutForm = ({ paymentClass }) => {
           })
           axiosSecure.delete(`/afterPayment/${paymentClass?.id}?email=${user?.email}`)
           .then(res=>{
-            console.log(res.data);
             if(res.data.deletedCount>0){
-              naviGate('/dashboard/mySelectedClasses')
+              naviGate('/dashboard/mySelectedClasses');
             }
           })
+          const instructorEmail={
+            email:paymentClass.instructorEmail
+          }
+          axiosSecure.patch(`/studentAdd`,instructorEmail)
+          .then(()=>{})
+          axiosSecure.patch(`/updateSeats/${paymentClass?.id}`)
+          .then(()=>{})
         })
-      console.log(transactionId);
     }
 
   }
