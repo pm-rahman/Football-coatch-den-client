@@ -33,11 +33,20 @@ const AllClasses = () => {
             })
         }
         const userInfo = {
-            studentEmail: user?.email
+            email:user?.email,
+            id:item._id,
+            seats:item.seats,
+            price:item.price,
+            className:item.className,
+            classImage:item.classImage,
+            instructorName:item.instructorName,
+            instructorEmail:item.email
         }
-        axiosSecure.patch(`/selectedByUser/${item._id}`, userInfo)
+        axiosSecure.put(`/selectedByUser/${user?.email}`, userInfo)
             .then(res => {
-                if (res.data.modifiedCount > 0) {
+                // TODO: Don't allowed user 2nd time
+                console.log(res.data);
+                if (res.data.upsertedCount > 0) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -46,6 +55,15 @@ const AllClasses = () => {
                         timer: 1500
                     })
                     refetch();
+                }
+                else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'You Already Select This Class',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             })
     }
@@ -69,11 +87,9 @@ const AllClasses = () => {
                                     <div className="badge badge-secondary ml-2">${item.price}</div>
                                 </h2>
                                 <div className="font-semibold">Instructor : {item.instructorName}</div>
-                                <div className="font-semibold">Email : {user?.email}</div>
-                                <div className="font-semibold">selected Email : {item?.selectedEmail && item.selectedEmail.map(email => email)}</div>
                                 <div className="font-semibold">{item.seats} sites Available</div>
                                 <div className="mt-2">
-                                    <button onClick={() => handleSelectBtn(item)} disabled={role === 'instructor' || role === 'admin' || item.seats === 0|| item?.selectedEmail && item.selectedEmail.map(email => user?.email === email)} className='btn bg-[#e84c3d] hover:bg-[#d0493d] text-white text-lg capitalize w-full py-2'>Select</button>
+                                    <button onClick={() => handleSelectBtn(item)} disabled={role === 'instructor' || role === 'admin' || item.seats === 0 } className='btn bg-[#e84c3d] hover:bg-[#d0493d] text-white text-lg capitalize w-full py-2'>Select</button>
                                 </div>
                             </div>
                         </div>

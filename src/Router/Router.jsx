@@ -19,6 +19,7 @@ import InstructorRouter from "./InstructorRouter";
 import AdminRouter from "./AdminRouter";
 import EditClass from "../Pages/Dashboard/EditClass/EditClass";
 import SendFeedback from "../Pages/Dashboard/ManageClasses/SendFeedback";
+import PaymentPage from "../Pages/Dashboard/PaymentPage/PaymentPage";
 
 const Router = createBrowserRouter([
     {
@@ -40,7 +41,7 @@ const Router = createBrowserRouter([
             {
                 path: '/instructors',
                 element: <Instructors />,
-                loader:()=>fetch(`${import.meta.env.VITE_SERVER_API}/instructors`)
+                loader: () => fetch(`${import.meta.env.VITE_SERVER_API}/instructors`)
             },
             {
                 path: '/instructorClasses',
@@ -55,45 +56,49 @@ const Router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRouter><DashboardLayout /></PrivateRouter>,
-        children:[
+        children: [
             {
-                path:'mySelectedClasses',
-                element: <MySelectedClasses/>
+                path: 'mySelectedClasses',
+                element: <MySelectedClasses />
             },
             {
-                path:'myEnrolledClasses',
-                element:<MyEnrolledClasses/>
+                path: 'myEnrolledClasses',
+                element: <MyEnrolledClasses />
             },
             {
-                path:'paymentHistory',
-                element: <PaymentHistory/>
+                path: 'paymentHistory',
+                element: <PaymentHistory />
+            },
+            {
+                path:'paymentPage',
+                element:<PaymentPage/>
             },
             // instructor
             {
-                path:'addClasses',
-                element:<InstructorRouter><AddClass/></InstructorRouter>
+                path: 'addClasses',
+                element: <InstructorRouter><AddClass /></InstructorRouter>
             },
             {
-                path:'editClasses/:id',
-                element:<InstructorRouter><EditClass/></InstructorRouter>,
-                loader: ({params})=>fetch(`${import.meta.env.VITE_SERVER_API}/class/${params.id}`)
+                path: 'editClasses/:id',
+                element: <InstructorRouter><EditClass /></InstructorRouter>,
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_SERVER_API}/class/${params.id}`)
             },
             {
-                path:'myClasses',
-                element:<InstructorRouter><MyClasses/></InstructorRouter>
+                path: 'myClasses',
+                element: <InstructorRouter><MyClasses /></InstructorRouter>
             },
             // admin router
             {
-                path:'manageClasses',
-                element:<AdminRouter><ManageClasses/></AdminRouter>
+                path: 'manageClasses',
+                element: <AdminRouter><ManageClasses /></AdminRouter>
             },
             {
-                path:'sendFeedback/:id',
-                element:<SendFeedback/>
+                path: 'sendFeedback/:id',
+                element: <SendFeedback />
             },
             {
-                path:'manageUsers',
-                element:<AdminRouter><ManageUsers/></AdminRouter>
+                path: 'manageUsers',
+                element: <AdminRouter><ManageUsers /></AdminRouter>
             }
         ]
     }

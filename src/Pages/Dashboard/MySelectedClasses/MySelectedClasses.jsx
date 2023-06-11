@@ -1,8 +1,39 @@
 import EmptyPage from "../../../Components/EmptyPage/EmptyPage";
 import { Icon } from '@iconify/react';
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import useSelectedClass from "../../../hooks/useSelectedClass";
 
 const MySelectedClasses = () => {
-    const selectedClasses = [{}]
+    const { user,setPaymentClass } = useContext(AuthContext);
+    const [selectedClasses,refetch] =useSelectedClass();
+    const [axiosSecure] = useAxiosSecure();
+
+
+    const handleDelete = id => {
+        // console.log(id);
+        const userInfo = {
+            studentEmail: user?.email
+        }
+        console.log(userInfo);
+        axiosSecure.delete(`/cancelByUser/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.deletedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class Deleted Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    }
     return (
         <>
             {
@@ -16,8 +47,9 @@ const MySelectedClasses = () => {
                                     <tr className="font-semibold text-sm">
                                         <th>#</th>
                                         <th>Class Name</th>
-                                        <th>Instructor</th>
-                                        <th>Available Sites</th>
+                                        <th>Instructor Name</th>
+                                        <th className="text-end">Price</th>
+                                        <th className="text-end">Available Sites</th>
                                         <th>Pay</th>
                                         <th>Delete</th>
                                     </tr>
@@ -27,11 +59,12 @@ const MySelectedClasses = () => {
                                         key={index}
                                     >
                                         <th>{index + 1}</th>
-                                        <td>Class Name</td>
-                                        <td>Instructor Name</td>
-                                        <td className="text-right">10</td>
-                                        <td><button className="btn bg-blue-600 hover:bg-blue-800 text-white text-base"><Icon icon="heroicons-outline:shopping-cart" /></button></td>
-                                        <td><button className="btn bg-red-600 hover:bg-red-800 text-white text-base"><Icon icon="heroicons-outline:trash" /></button></td>
+                                        <td>{item.className}</td>
+                                        <td>{item.instructorName}</td>
+                                        <td className="text-end">${item.price}</td>
+                                        <td className="text-right">{item.seats}</td>
+                                        <td><Link onClick={()=>setPaymentClass(item)} to='/dashboard/paymentPage' className="btn bg-[rgba(1,16,31,.9)] hover:bg-[rgb(1,16,31)] text-white text-base"><Icon icon="heroicons-outline:shopping-cart" /></Link></td>
+                                        <td><button onClick={() => handleDelete(item._id)} className="btn bg-red-600 hover:bg-red-800 text-white text-base"><Icon icon="heroicons-outline:trash" /></button></td>
                                     </tr>)}
                                 </tbody>
                             </table>
