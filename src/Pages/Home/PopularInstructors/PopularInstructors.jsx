@@ -14,7 +14,7 @@ const PopularInstructors = () => {
         })
     },[setInstructors]);
     return (
-        <div className={`py-16 px-5 md:px-10 lg:px-20 ${dark?'bg-white text-[rgb(1,16,31)]':'bg-[rgb(1,16,31)] text-white'}`}>
+        <div className={`py-16 px-5 md:px-10 lg:px-20  ${dark?'bg-slate-100 text-[rgb(1,16,31)]':' text-white'}`}>
             <SectionTitle
                 title='Meet Our Instructors'
                 subTitle='Meet the experts who will help you take your coaching to the next level'
@@ -23,7 +23,7 @@ const PopularInstructors = () => {
                 {
                     instructors.map((item, index) => <div
                         key={index}
-                        className={`shadow rounded-md ${dark?'bg-white text-[rgb(1,16,31)]':'bg-[rgb(1,16,31)] shadow-white  text-white'}`}
+                        className={`shadow rounded-md ${dark?'text-[rgb(1,16,31)]':'shadow-white  text-white'}`}
                     >
                         <figure className="h-64 overflow-hidden"><img className="w-full min-h-full" src={item.photo} alt="Thumbnail" /></figure>
                         <div className="px-4 py-4">

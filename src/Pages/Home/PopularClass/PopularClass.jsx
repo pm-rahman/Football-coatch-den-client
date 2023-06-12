@@ -14,7 +14,7 @@ const PopularClass = () => {
         })
     },[setClasses]);
     return (
-        <div className={`py-16 px-5 md:px-10 lg:px-20 ${!dark?'bg-white text-[rgb(1,16,31)]':'bg-[rgb(1,16,31)] text-white'}`}>
+        <div className={`py-16 px-5 md:px-10 lg:px-20 ${!dark?'bg-white text-[rgb(1,16,31)]':'text-white'}`}>
             <SectionTitle
                 title='Popular Classes'
                 subTitle='Learn from the best coaches in the business'
@@ -25,7 +25,7 @@ const PopularClass = () => {
                         key={index}
                         className={`shadow rounded-md ${!dark?'':'shadow-white'}`}
                     >
-                        <figure className="h-64 overflow-hidden"><img className="min-w-auto min-h-full" src={item.classImage} alt="Thumbnail" /></figure>
+                        <figure className="h-64 overflow-hidden"><img className="w-full" src={item.classImage} alt="Thumbnail" /></figure>
                         <div className="p-5">
                             <h2 className="card-title capitalize">
                                 {item.className}

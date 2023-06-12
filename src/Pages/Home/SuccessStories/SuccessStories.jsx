@@ -7,7 +7,7 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const SuccessStories = () => {
     const {dark} = useContext(AuthContext);
     return (
-        <div className={`py-16 px-5 md:px-10 lg:px-20 ${!dark?'bg-white text-[rgb(1,16,31)]':'bg-[rgb(1,16,31)] text-white'}`}>
+        <div className={`py-16 px-5 md:px-10 lg:px-20 ${!dark?'bg-white text-[rgb(1,16,31)]':'text-white'}`}>
             <SectionTitle
                 title='How Our Students Achieved Success'
                 subTitle='Real-life stories of students who have achieved success on and off the field'

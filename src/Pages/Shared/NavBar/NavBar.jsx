@@ -18,19 +18,19 @@ const NavBar = () => {
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
         {user && <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>}
-        <button className="flex border w-fit rounded-full font-semibold cursor-pointer">
-            <span className={`px-3 py-1 text-xl rounded-l-full ${!dark && 'bg-white text-black'}`} onClick={() => setDark(false)}><Icon icon="heroicons-outline:moon" /></span>
-            <span className={`px-3 py-1 text-xl rounded-r-full ${dark && 'bg-black text-white'}`} onClick={() => setDark(true)}><Icon icon="entypo:adjust" /></span>
+        <button className="flex ml-3 lg:ml-0 border w-fit rounded-full font-semibold cursor-pointer">
+            <span className={`px-3 py-1 text-xl rounded-l-full ${!dark && 'bg-slate-100 text-black'}`} onClick={() => setDark(false)}><Icon icon="heroicons-outline:moon" /></span>
+            <span className={`px-3 py-1 text-xl rounded-r-full ${dark && 'bg-black text-slate-100'}`} onClick={() => setDark(true)}><Icon icon="entypo:adjust" /></span>
         </button>
     </>
     return (
-        <div className={`flex items-center justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3  ${dark ? 'bg-white text-[rgb(1,16,31)]' : 'bg-[rgb(1,16,31)] text-white'}`}>
+        <div className={`flex items-center justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3  ${dark ? 'bg-slate-100 border-b border-slate-300 text-[rgb(1,16,31)]' : 'bg-[rgb(1,16,31)] text-white'}`}>
             <div className="flex items-center">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={0} className={`menu menu-sm text-base uppercase dropdown-content mt-3 py-2 shadow rounded-box w-52 ${dark ? 'bg-white text-black' : 'bg-[rgb(1,16,31)] text-white'}`}>
+                    <ul tabIndex={0} className={`menu menu-sm text-base uppercase dropdown-content mt-3 py-2 shadow rounded-box w-52 ${dark ? 'bg-slate-100 text-black' : 'bg-[rgb(1,16,31)] text-white'}`}>
                         {navLink}
                     </ul>
                 </div>

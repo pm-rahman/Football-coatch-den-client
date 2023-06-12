@@ -1,5 +1,5 @@
 import Button from '../../../Components/Button/Button';
-import banner from '../../../assets/home/banner.svg';
+import banner from '../../../assets/home/background-1.svg';
 import trainingImage from '../../../assets/home/training-image.png';
 
 const HomeBanner = () => {
