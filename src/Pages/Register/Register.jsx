@@ -45,7 +45,6 @@ const Register = () => {
                                 }
                                 naviGate('/');
                             })
-                        console.log('from register page', user);
                     })
                     .catch(error => {
                         setConfirmError(error.message);

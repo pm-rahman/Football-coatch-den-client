@@ -16,8 +16,7 @@ const ManageUsers = () => {
         }
     })
     const handleMakeInstructor = (id) => {
-        console.log(id)
-        axiosSecure.patch(`${import.meta.env.VITE_SERVER_API}/user/promote/instructor/${id}`)
+        axiosSecure.patch(`${import.meta.env.VITE_SERVER_API}/user/promote/instructor/${id}`,{email:user?.email})
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
@@ -32,7 +31,7 @@ const ManageUsers = () => {
             })
     }
     const handleMakeAdmin = (id) => {
-        axiosSecure.patch(`${import.meta.env.VITE_SERVER_API}/user/promote/admin/${id}`)
+        axiosSecure.patch(`${import.meta.env.VITE_SERVER_API}/user/promote/admin/${id}`,{email:user?.email})
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({

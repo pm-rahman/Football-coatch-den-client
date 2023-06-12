@@ -20,7 +20,7 @@ const ManageClasses = () => {
     }, [axiosSecure, user?.email,classes])
 
     const handleStatus = (id, status) => {
-        axiosSecure.patch(`/updateStatus/${id}`, { status })
+        axiosSecure.patch(`/updateClassStatus/${id}`, { status,email:user?.email })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({

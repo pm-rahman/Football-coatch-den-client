@@ -8,7 +8,6 @@ const Instructors = () => {
         <div className="py-16 px-5 md:px-10 lg:px-20">
             <SectionTitle
                 title='All Instructors'
-                // TODO: make good description
                 subTitle='Find a best Instructors for you'
             />
             {

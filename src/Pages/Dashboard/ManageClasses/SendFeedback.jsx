@@ -19,12 +19,13 @@ const customStyles = {
 
 const SendFeedback = () => {
     const {id} = useParams();
+    const {user} = useContext(AuthContext);
     const { setIsOpen, modalIsOpen } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
     const naviGate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
-        axiosSecure.patch(`/updateFeedback/${id}`,data)
+        axiosSecure.patch(`/updateFeedback/${id}`,{data,email:user?.email})
         .then(res=>{
             if(res.data.modifiedCount>0){
                 Swal.fire({

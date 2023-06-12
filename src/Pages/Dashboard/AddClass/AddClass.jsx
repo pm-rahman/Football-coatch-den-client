@@ -18,7 +18,6 @@ const AddClass = () => {
     const onSubmit = data => {
         setImageError(false);
         if (!image) {
-            console.log('clicked');
             setImageError(true)
             return;
         }
@@ -58,7 +57,6 @@ const AddClass = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data.data.display_url)
                 setImage(data.data.display_url);
                 setImageUploading(false)
             })

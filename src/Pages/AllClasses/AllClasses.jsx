@@ -45,8 +45,6 @@ const AllClasses = () => {
             }
             axiosSecure.put(`/selectedByUser/${user?.email}`, userInfo)
                 .then(res => {
-                    // TODO: Don't allowed user 2nd time
-                    console.log(res.data);
                     if (res.data.upsertedCount > 0) {
                         Swal.fire({
                             position: 'top-end',

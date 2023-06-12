@@ -26,7 +26,6 @@ const MyEnrolledClasses = () => {
                                         <div className="badge badge-secondary ml-2">${item.amount}</div>
                                     </h2>
                                     <div className="font-semibold">Instructor : {item.instructorName}</div>
-                                    <div className="font-semibold">{item.seats} sites Available</div>
                                 </div>
                             </div>
                             )

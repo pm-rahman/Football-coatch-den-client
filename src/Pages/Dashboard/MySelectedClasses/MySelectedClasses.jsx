@@ -14,14 +14,8 @@ const MySelectedClasses = () => {
 
 
     const handleDelete = id => {
-        // console.log(id);
-        const userInfo = {
-            studentEmail: user?.email
-        }
-        console.log(userInfo);
-        axiosSecure.delete(`/cancelByUser/${id}`)
+        axiosSecure.delete(`/cancelByUser/${id}?email=${user?.email}`)
             .then(res => {
-                console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     refetch();
                     Swal.fire({

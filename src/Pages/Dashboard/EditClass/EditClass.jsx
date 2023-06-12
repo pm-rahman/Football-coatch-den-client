@@ -23,7 +23,6 @@ const EditClass = () => {
 
         axiosSecure.patch(`/editClass/${_id}`, UpdateClass)
             .then(res => {
-                console.log(res.data);
                 if (res.data.modifiedCount>0) {
                     Swal.fire({
                         position: 'top-end',

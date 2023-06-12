@@ -1,7 +1,7 @@
 ## The Football Coach's Den
 
 #### Live SiteLink
- (https://the-football-coach-den.web.app/)
+ (https://the-football-coach-den.web.app)
 
 - This is a summer camp for football training. Here, you can easily receive professional training.
 - In the homepage, I have added multiple features for a better user experience, such as a dark-light toggle button and React Spring for animations.

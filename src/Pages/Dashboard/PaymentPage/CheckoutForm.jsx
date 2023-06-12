@@ -44,11 +44,9 @@ const CheckoutForm = ({ paymentClass }) => {
     });
     if (error) {
       setCardError(error.message)
-      // console.log('[error]', error)
     }
     else {
       setCardError('')
-      // console.log('[paymentMethod]', paymentMethod)
     }
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
       clientSecret,
@@ -67,16 +65,14 @@ const CheckoutForm = ({ paymentClass }) => {
     }
     if (paymentIntent?.status === 'succeeded') {
       setProcessing(false)
-      // console.log('console payment intent', paymentIntent);
 
       const paymentInfo = {
         id: paymentClass.id,
-        transactionId:paymentIntent.id,
+        transactionId: paymentIntent.id,
         email: user?.email,
         name: user?.displayName,
-        classImage:paymentClass.classImage,
-        instructorName:paymentClass.instructorName,
-        seats:paymentClass.seats,
+        classImage: paymentClass.classImage,
+        instructorName: paymentClass.instructorName,
         amount: paymentClass.price,
         className: paymentClass.className,
         date: new Date()
@@ -91,27 +87,33 @@ const CheckoutForm = ({ paymentClass }) => {
               showConfirmButton: false,
               timer: 1500
             })
-          }
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Already Payment',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          axiosSecure.delete(`/afterPayment/${paymentClass?.id}?email=${user?.email}`)
-          .then(res=>{
-            if(res.data.deletedCount>0){
-              naviGate('/dashboard/mySelectedClasses');
+            axiosSecure.delete(`/afterPayment/${paymentClass?.id}?email=${user?.email}`)
+              .then(res => {
+                if (res.data.deletedCount > 0) {
+                  naviGate('/dashboard/mySelectedClasses');
+                }
+              })
+            const instructorEmail = {
+              email: paymentClass.instructorEmail
             }
-          })
-          const instructorEmail={
-            email:paymentClass.instructorEmail
+            axiosSecure.patch(`/studentAdd`, instructorEmail)
+              .then(() => { })
+            axiosSecure.patch(`/updateEnrolSeats/${paymentClass?.id}`, { email: user?.email })
+              .then(() => {
+              })
           }
-          axiosSecure.patch(`/studentAdd`,instructorEmail)
-          .then(()=>{})
-          axiosSecure.patch(`/updateSeats/${paymentClass?.id}`)
-          .then(()=>{})
+          else{
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              width: 600,
+              title: 'you have paid before for This class',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            naviGate('/dashboard/mySelectedClasses');
+          }
+
         })
     }
 
