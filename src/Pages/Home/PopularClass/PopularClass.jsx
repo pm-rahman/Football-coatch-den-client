@@ -25,7 +25,7 @@ const PopularClass = () => {
                         key={index}
                         className={`shadow rounded-md ${!dark?'':'shadow-white'}`}
                     >
-                        <figure className="h-64 overflow-hidden"><img className="w-full" src={item.classImage} alt="Thumbnail" /></figure>
+                        <figure className="h-64 overflow-hidden"><img className="w-full min-h-full" src={item.classImage} alt="Thumbnail" /></figure>
                         <div className="p-5">
                             <h2 className="card-title capitalize">
                                 {item.className}
