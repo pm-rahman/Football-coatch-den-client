@@ -19,7 +19,7 @@ const Instructors = () => {
                                 key={index}
                                 className="shadow-lg rounded-md capitalize"
                             >
-                                <figure className="h-60 flex items-center justify-center overflow-hidden"><img className="w-full mx-auto" src={instructor.photo} alt="Thumbnail" /></figure>
+                                <figure className="h-64 overflow-hidden"><img className="w-full min-h-full" src={instructor.photo} alt="Thumbnail" /></figure>
                                 <div className="p-4">
                                     <h2 className="card-title uppercase">{instructor.name}</h2>
                                     <p>Email : {instructor.email}</p>

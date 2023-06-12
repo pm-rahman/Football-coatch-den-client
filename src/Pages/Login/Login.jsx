@@ -93,7 +93,7 @@ const Login = () => {
                     {errors.password && <span className="text-red-500 mt-2">Password is required</span>}
                     {confirmError && <span className="text-red-500 mt-2">{confirmError}</span>}
                 </div>
-                <input type="submit" value="Login" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
+                <input type="submit" value="Login" className="py-3 btn hover:bg-[rgb(1,16,31)] font-semibold rounded w-full mt-3 bg-[rgba(1,16,31,.9)] text-white" />
             </form>
             <p className="mt-1">I do not have account <Link to='/register' className="text-red-500 hover:underline">Register</Link></p>
             <div className="divider"></div>

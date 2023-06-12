@@ -25,7 +25,7 @@ const PopularInstructors = () => {
                         key={index}
                         className={`shadow rounded-md ${dark?'bg-white text-[rgb(1,16,31)]':'bg-[rgb(1,16,31)] shadow-white  text-white'}`}
                     >
-                        <figure className="h-64 overflow-hidden"><img className="w-full" src={item.photo} alt="Thumbnail" /></figure>
+                        <figure className="h-64 overflow-hidden"><img className="w-full min-h-full" src={item.photo} alt="Thumbnail" /></figure>
                         <div className="px-4 py-4">
                             <h2 className="card-title uppercase">
                                {item.name}

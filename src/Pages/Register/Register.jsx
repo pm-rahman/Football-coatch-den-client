@@ -143,7 +143,7 @@ const Register = () => {
                     {errors.confirmPassword && <span className="text-red-500 mt-2">Password is required</span>}
                     {ConfirmError && <span className="text-red-500 mt-2">{ConfirmError}</span>}
                 </div>
-                <input type="submit" value="Register" className="py-3 btn hover:bg-[#d0493d] font-semibold rounded w-full mt-3 bg-[#e84c3d] text-white" />
+                <input type="submit" value="Register" className="py-3 btn hover:bg-[rgb(1,16,31)] font-semibold rounded w-full mt-3 bg-[rgba(1,16,31,.9)] text-white" />
             </form>
             <p className="mt-1">I have an account <Link to='/login' className="text-red-500 hover:underline">Login</Link></p>
             <div className="divider"></div>

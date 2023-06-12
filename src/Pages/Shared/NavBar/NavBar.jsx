@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useUserRole from "../../../hooks/useUserRole";
+import { Icon } from "@iconify/react";
 
 const NavBar = () => {
-    const { user, logOut,dark, setDark } = useContext(AuthContext);
+    const { user, logOut, dark, setDark } = useContext(AuthContext);
     const [role] = useUserRole();
 
     const handleLogOut = () => {
@@ -16,40 +17,38 @@ const NavBar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
-        {user ? <>
-            <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>
-            <li onClick={handleLogOut} className='pl-3 cursor-pointer text-sm lg:pl-6 pr-2'>Logout</li>
-        </> : <>
-            <li><NavLink className='lg:pl-6 pr-2' to='/login'>Login</NavLink></li>
-        </>}
+        {user && <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>}
+        <button className="flex border w-fit rounded-full font-semibold cursor-pointer">
+            <span className={`px-3 py-1 text-xl rounded-l-full ${!dark && 'bg-white text-black'}`} onClick={() => setDark(false)}><Icon icon="heroicons-outline:moon" /></span>
+            <span className={`px-3 py-1 text-xl rounded-r-full ${dark && 'bg-black text-white'}`} onClick={() => setDark(true)}><Icon icon="entypo:adjust" /></span>
+        </button>
     </>
     return (
-        <div className={`flex items-center justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3 bg-[rgb(1,16,31)] text-white ${dark&&'bg-white text-[rgb(1,16,31)]'}`}>
-            <div className="">
+        <div className={`flex items-center justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3  ${dark ? 'bg-white text-[rgb(1,16,31)]' : 'bg-[rgb(1,16,31)] text-white'}`}>
+            <div className="flex items-center">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={0} className={`menu menu-sm text-base uppercase dropdown-content mt-3 py-2 shadow bg-[rgb(1,16,31)] text-white rounded-box w-52 ${dark&&'bg-white text-black'}`}>
+                    <ul tabIndex={0} className={`menu menu-sm text-base uppercase dropdown-content mt-3 py-2 shadow rounded-box w-52 ${dark ? 'bg-white text-black' : 'bg-[rgb(1,16,31)] text-white'}`}>
                         {navLink}
                     </ul>
                 </div>
-                <Link to='/' className="btn pl-0 btn-ghost normal-case text-lg md:text-xl">The Football Coach's Den</Link>
+                <Link to='/' className="btn pl-0 btn-ghost normal-case sm:text-lg text-sm">The Football Coach's Den</Link>
             </div>
             <div className="hidden lg:flex">
-                <ul className="menu items-center menu-horizontal text-base uppercase px-1">
+                <ul className={`menu items-center menu-horizontal text-base uppercase px-1`}>
                     {navLink}
                 </ul>
             </div>
-            <button className="flex border rounded-full font-semibold cursor-pointer">
-                <span className={`px-3 py-1 rounded-l-full ${!dark&&'bg-white text-black'}`} onClick={() => setDark(false)}>Dark</span>
-                <span className={`px-3 py-1 rounded-r-full ${dark&&'bg-black text-white'}`} onClick={() => setDark(true)}>Light</span>
-            </button>
-            {user &&
-                <div>
-                    <figure className="h-8 w-8 cursor-pointer rounded-full overflow-hidden"><img title={user?.displayName} referrerPolicy="no-referrer" className="h-8" src={user?.photoURL} alt="" /></figure>
-                </div>
-            }
+            <div className="flex items-center gap-1">
+                {user ? <>
+                    <button onClick={handleLogOut} className={`${!dark ? 'btn-outline text-white' : 'text-dark '} border rounded-lg btn-sm mr-1 text-sm`}>Logout</button>
+                    <figure className="h-8 w-8 cursor-pointer rounded-full overflow-hidden"><img title={user?.displayName} referrerPolicy="no-referrer" className="h-8 w-auto" src={user?.photoURL} alt="" /></figure>
+                </> : <>
+                    <div><NavLink className={`${!dark ? 'text-white' : 'text-dark '} btn-outline border py-1 px-3 rounded-lg btn-sm mr-1 text-sm`} to='/login'>Login</NavLink></div>
+                </>}
+            </div>
         </div>
     );
 };
