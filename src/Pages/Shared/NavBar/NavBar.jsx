@@ -2,10 +2,9 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useUserRole from "../../../hooks/useUserRole";
-import { Icon } from "@iconify/react";
 
 const NavBar = () => {
-    const { user, logOut, dark, setDark } = useContext(AuthContext);
+    const { user, logOut, dark } = useContext(AuthContext);
     const [role] = useUserRole();
 
     const handleLogOut = () => {
@@ -18,10 +17,10 @@ const NavBar = () => {
         <li><NavLink to='/instructors'>Instructors</NavLink></li>
         <li><NavLink to='/allClasses'>Classes</NavLink></li>
         {user && <li><NavLink to={role && role === 'admin' ? '/dashboard/manageClasses' : role === 'instructor' ? '/dashboard/myClasses' : '/dashboard/mySelectedClasses'}>Dashboard</NavLink></li>}
-        <button className="flex ml-3 lg:ml-0 border w-fit rounded-full font-semibold cursor-pointer">
+        {/* <button className="flex ml-3 lg:ml-0 border w-fit rounded-full font-semibold cursor-pointer">
             <span className={`px-3 py-1 text-xl rounded-l-full ${!dark && 'bg-slate-100 text-black'}`} onClick={() => setDark(false)}><Icon icon="heroicons-outline:moon" /></span>
             <span className={`px-3 py-1 text-xl rounded-r-full ${dark && 'bg-black text-slate-100'}`} onClick={() => setDark(true)}><Icon icon="entypo:adjust" /></span>
-        </button>
+        </button> */}
     </>
     return (
         <div className={`flex items-center justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3  ${dark ? 'bg-slate-100 border-b border-slate-300 text-[rgb(1,16,31)]' : 'bg-[rgb(1,16,31)] text-white'}`}>

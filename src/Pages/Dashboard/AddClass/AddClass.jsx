@@ -89,7 +89,6 @@ const AddClass = () => {
                         </label>
                         <input type="email" value={user?.email} {...register("InstructorEmail")} placeholder="Instructor Email" className="input input-bordered w-full" />
                     </div>
-
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                     <div className="form-control w-full">
