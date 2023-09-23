@@ -4,14 +4,14 @@ import PopularInstructors from "./PopularInstructors/PopularInstructors";
 import SuccessStories from "./SuccessStories/SuccessStories";
 
 const Home = () => {
-    return (
-        <>
-            <HomeBanner />
-            <PopularClass />
-            <PopularInstructors />
-            <SuccessStories />
-        </>
-    );
+  return (
+    <>
+      <HomeBanner />
+        <PopularClass />
+        <PopularInstructors />
+        <SuccessStories />
+    </>
+  );
 };
 
 export default Home;

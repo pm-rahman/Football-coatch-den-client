@@ -23,7 +23,7 @@ const NavBar = () => {
         </button> */}
     </>
     return (
-        <div className={`flex items-center justify-between z-50 sticky top-0 w-full px-5 md:px-10 lg:px-20 py-3 bg-[rgb(1,1,21)] text-white`}>
+        <div className={`flex items-center justify-between z-50 sticky top-0 w-full px-5 md:px-10 lg:px-20 py-3 bg-[#12141D] text-white`}>
             <div className="flex items-center">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

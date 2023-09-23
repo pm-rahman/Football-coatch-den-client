@@ -14,7 +14,7 @@ const PopularClass = () => {
         })
     },[setClasses]);
     return (
-        <div className={`py-16 px-5 md:px-10 lg:px-20 ${!dark?'bg-white text-[rgb(1,16,31)]':'text-back lg:text-white'}`}>
+        <div className={`py-16 px-5 md:px-10 lg:px-20 text-white`}>
             <SectionTitle
                 title='Popular Classes'
                 subTitle='Learn from the best coaches in the business'
