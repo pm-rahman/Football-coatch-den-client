@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+--primary-color:rgb(2,3,129);
+--dark-color:rgb(1, 1, 21);
+--secondary-color:#9b51e0;
+}
 .primary_color {
-    color: #e84c3d;
+    color: var(--primary-color);
 }
 
 a.active {
     background-color: transparent;
-    color: rgb(33, 141, 250);
+    color: var(--secondary-color);
     font-weight: 600;
 }

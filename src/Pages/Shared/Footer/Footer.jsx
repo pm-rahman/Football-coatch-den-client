@@ -8,7 +8,7 @@ const Footer = () => {
     const {dark} = useContext(AuthContext);
     const noHome = location.pathname!=='/';
     return (
-        <div className={`px-5 md:px-10 lg:px-20 pt-10 pb-10 lg:pb-20 ${!dark?`text-white bg-[rgb(1,16,31)] ${noHome?'bg-[rgb(1,16,31)]':'lg:bg-inherit'}`:`${noHome&&'bg-[rgb(1,16,31)]'} bg-slate-100`}`}>
+        <div className={`px-5 md:px-10 lg:px-20 pt-10 pb-10 lg:pb-20 text-white bg-[rgb(1,16,31)]`}>
             <footer className="footer py-4">
                 <div>
                     <Link to='/' className="text-lg md:text-xl font-semibold mb-6">The Football Coach's Den</Link>

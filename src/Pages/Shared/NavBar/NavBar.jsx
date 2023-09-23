@@ -23,7 +23,7 @@ const NavBar = () => {
         </button> */}
     </>
     return (
-        <div className={`flex items-center justify-between z-50 fixed w-full px-5 md:px-10 lg:px-20 py-3  ${dark ? 'bg-slate-100 border-b border-slate-300 text-[rgb(1,16,31)]' : 'bg-[rgb(1,16,31)] text-white'}`}>
+        <div className={`flex items-center justify-between z-50 sticky top-0 w-full px-5 md:px-10 lg:px-20 py-3 bg-[rgb(1,1,21)] text-white`}>
             <div className="flex items-center">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -33,7 +33,7 @@ const NavBar = () => {
                         {navLink}
                     </ul>
                 </div>
-                <Link to='/' className="btn pl-0 btn-ghost normal-case sm:text-lg text-sm">The Football Coach's Den</Link>
+                <Link to='/' className="btn pl-0 btn-ghost sm:text-lg text-sm uppercase">The Football Coach's Den</Link>
             </div>
             <div className="hidden lg:flex">
                 <ul className={`menu items-center menu-horizontal text-base uppercase px-1`}>
