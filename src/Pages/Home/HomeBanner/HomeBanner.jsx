@@ -1,12 +1,10 @@
 import Button from '../../../Components/Button/Button';
-import banner from '../../../assets/home/background-1.svg';
 import trainingImage from '../../../assets/home/training-image.png';
 
 const HomeBanner = () => {
     return (
         <>
-            <div className='relative py-4 md:h-[450px] overflow-hidden'>
-                <img className='absolute -z-10 top-0 left-0 h-full w-full' src={banner} alt="" />
+            <div className='relative gradient-bg py-4 md:h-[450px] overflow-hidden'>
                 <div className='px-5 md:px-10 lg:px-20 grid md:grid-cols-2 gap-2'>
                     <div className='md:h-[450px] text-white flex flex-col justify-center'>
                         <span className='text-[#e84c3d] capitalize text-lg font-semibold tracking-wider inline-block pb-1 mb-1 border-b border-slate-500'>Hare Some exclusive classes</span>
