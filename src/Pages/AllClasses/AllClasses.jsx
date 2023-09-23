@@ -7,7 +7,6 @@ import EmptyPage from "../../Components/EmptyPage/EmptyPage";
 import useUserRole from "../../hooks/useUserRole";
 import useClasses from "../../hooks/useClasses";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Icon } from "@iconify/react";
 import Button from "../../Components/Button/Button";
 
 const AllClasses = () => {
@@ -93,10 +92,7 @@ const AllClasses = () => {
                   <h2 className="text-xl font-semibold capitalize">
                     {item.className}
                   </h2>
-                  <div className="mt-1 text-lg text-[#9b51e0] font-semibold flex items-center">
-                    <Icon icon="fa-solid:dollar-sign" />
-                    {item.price}
-                  </div>
+                  <div className="mt-1 text-lg text-[#9b51e0] font-semibold flex items-center">${item.price}</div>
                   <p className="font-semibold text-[#bbacca]">
                     Instructor : {item.instructorName}
                   </p>

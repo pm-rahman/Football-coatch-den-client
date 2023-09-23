@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import axios from "axios";
-import { Icon } from "@iconify/react";
 import Button from "../../../Components/Button/Button";
 
 const PopularClass = () => {
@@ -40,9 +39,7 @@ const PopularClass = () => {
             </figure>
             <div className="p-5">
               <h2 className="text-xl font-semibold capitalize">{item.className}</h2>
-              <div className="mt-1 text-lg text-[#9b51e0] font-semibold flex items-center">
-                <Icon icon="fa-solid:dollar-sign" />
-                {item.price}
+              <div className="mt-1 text-lg text-[#9b51e0] font-semibold flex items-center">${item.price}
               </div>
               <p className="font-semibold text-[#bbacca]">Instructor {item.instructorName}</p>
               <p className="font-semibold text-[#bbacca]">
