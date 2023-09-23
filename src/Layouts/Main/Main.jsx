@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import NavBar from "../../Pages/Shared/NavBar/NavBar";
 import Footer from "../../Pages/Shared/Footer/Footer";
 const Main = () => {
@@ -6,7 +6,7 @@ const Main = () => {
   return (
     <>
     <NavBar/>
-    <div className="bg-color text-white">
+    <div className="gradient-t-bg text-white min-h-[55vh]">
     <Outlet/>
     </div>
     <Footer/>

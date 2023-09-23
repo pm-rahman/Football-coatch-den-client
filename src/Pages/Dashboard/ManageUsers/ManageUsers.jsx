@@ -49,7 +49,7 @@ const ManageUsers = () => {
         <div>
             {
                 users && users.length > 0 ? <>
-                    <h2 className="text-3xl uppercase font-semibold">Mange Users</h2>
+                    <h2 className="text-2xl sm:text-3xl mb-5 uppercase font-bold">Mange Users</h2>
                     <div className="overflow-x-auto mb-4">
                         <table className="table">
                             {/* head */}

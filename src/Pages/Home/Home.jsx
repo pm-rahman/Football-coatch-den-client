@@ -7,9 +7,9 @@ const Home = () => {
   return (
     <>
       <HomeBanner />
-        <PopularClass />
-        <PopularInstructors />
-        <SuccessStories />
+      <PopularClass />
+      <PopularInstructors />
+      <SuccessStories />
     </>
   );
 };

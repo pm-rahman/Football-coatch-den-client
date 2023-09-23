@@ -65,7 +65,7 @@ const AddClass = () => {
     }
     return (
         <div className="bg-slate-100 px-10 py-14 rounded">
-            <h2 className="text-2xl font-bold text-center uppercase mb-2">Add A class</h2>
+            <h2 className="text-2xl sm:text-3xl mb-5 uppercase font-bold">Add A class</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="form-control w-full">
                     <label className="label">
