@@ -9,7 +9,7 @@ const PaymentPage = () => {
     const {paymentClass} = useContext(AuthContext);
     return (
         <div className="w-1/2 mx-auto">
-            <h3 className="text-2xl mb-8 font-semibold">Your Payment Amount ${paymentClass?.price}</h3>
+            <h3 className="text-2xl sm:text-3xl mb-5 uppercase font-bold">Your Payment Amount ${paymentClass?.price}</h3>
             <Elements stripe={stripePromise}>
                 <CheckoutForm paymentClass={paymentClass} />
             </Elements>

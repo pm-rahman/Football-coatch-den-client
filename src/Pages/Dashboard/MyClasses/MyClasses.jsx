@@ -39,7 +39,7 @@ const MyClasses = () => {
         <>
             {
                 myClasses && myClasses.length > 0 ? <>
-                    <h2 className="text-3xl uppercase font-semibold mb-4">Your Added Classes</h2>
+                    <h2 className="text-2xl sm:text-3xl mb-5 uppercase font-bold">Your Added Classes</h2>
                     <div className="overflow-x-auto mb-4">
                         <table className="table capitalize">
                             {/* head */}

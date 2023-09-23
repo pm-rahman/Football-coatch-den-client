@@ -1,46 +1,63 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import axios from "axios";
 import { Icon } from "@iconify/react";
-import { AuthContext } from "../../../Providers/AuthProvider";
+import Button from "../../../Components/Button/Button";
 
 const PopularClass = () => {
-    const [classes,setClasses] = useState([])
-    const {dark} = useContext(AuthContext);
-    useEffect(()=>{
-        axios.get(`${import.meta.env.VITE_SERVER_API}/popularClasses`)
-        .then(res=>{
-            setClasses(res.data)
-        })
-    },[setClasses]);
-    return (
-        <div className={`py-16 px-5 md:px-10 lg:px-20 text-white`}>
-            <SectionTitle
-                title='Popular Classes'
-                subTitle='Learn from the best coaches in the business'
-            />
-            <div className="grid md:grid-cols-3 gap-5 mt-8">
-                {
-                    classes.map((item, index) => <div
-                        key={index}
-                        className={`shadow rounded-md ${!dark?'':'shadow-white'}`}
-                    >
-                        <figure className="h-64 overflow-hidden"><img className="w-full min-h-full" src={item.classImage} alt="Thumbnail" /></figure>
-                        <div className="p-5">
-                            <h2 className="card-title capitalize">
-                                {item.className}
-                                <div className="badge bg-[#071f37] text-white px-3 py-2 font-semibold"><Icon className="inline-block" icon="fa-solid:dollar-sign"  />{item.price}</div>
-                            </h2>
-                            <p className="font-semibold ">Instructor {item.instructorName}</p>
-                            <p><Icon className="inline-block mr-1" icon="fa-regular:envelope" /> {item.instructorEmail}</p>
-                            <p className="font-semibold">{item.enrolled?item.enrolled:0} Students</p>
-                        </div>
-                    </div>
-                    )
-                }
+  const [classes, setClasses] = useState([]);
+  const [displaySlideStart,setDisplaySlideStart]=useState(0);
+  const [displaySlideEnd,setDisplaySlideEnd]=useState(4);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_SERVER_API}/popularClasses`)
+      .then((res) => {
+        setClasses(res.data);
+      });
+  }, [setClasses]);
+  const displayClassStartHandler=(i)=>{
+        setDisplaySlideStart(i);
+        setDisplaySlideEnd(i+4);
+  }
+  return (
+    <div className={`pt-16 px-5 md:px-10 lg:px-20 text-white`}>
+      <SectionTitle
+        title="Popular Classes"
+        subTitle="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ipsa doloremque aspernatur odio alias atque dolore autem quaerat non id."
+      />
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5 mt-8">
+        {classes?.slice(displaySlideStart, displaySlideEnd)?.map((item, index) => (
+          <div
+            key={index}
+            className={` bg-[#1C1E2AB3] cart-bg shadow rounded-lg overflow-hidden`}
+          >
+            <figure className="overflow-hidden md:h-52 lg:h-60 xl:h-48">
+              <img
+                className="w-auto h-full"
+                src={item.classImage}
+                alt="Thumbnail"
+              />
+            </figure>
+            <div className="p-5">
+              <h2 className="text-xl font-semibold capitalize">{item.className}</h2>
+              <div className="mt-1 text-lg text-[#9b51e0] font-semibold flex items-center">
+                <Icon icon="fa-solid:dollar-sign" />
+                {item.price}
+              </div>
+              <p className="font-semibold text-[#bbacca]">Instructor {item.instructorName}</p>
+              <p className="font-semibold text-[#bbacca]">
+                {item.enrolled ? item.enrolled : 0} Students
+              </p>
+              <Button full={true} className="mt-5 rounded-full" btnText="Enroll Now" />
             </div>
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center mt-7">
+        {classes.length>4&&classes?.slice(3)?.map((item,i)=><span key={i} onClick={()=>displayClassStartHandler(i)} className={`cursor-pointer w-10 py-1 rounded-r-full flex-1 ${displaySlideStart===i?"bg-[#9b51e0]":"bg-[#541c89]"} `}></span>)}
+      </div>
+    </div>
+  );
 };
 
 export default PopularClass;

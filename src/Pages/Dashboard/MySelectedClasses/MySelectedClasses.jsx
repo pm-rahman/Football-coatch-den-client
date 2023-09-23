@@ -32,7 +32,7 @@ const MySelectedClasses = () => {
         <>
             {
                 selectedClasses && selectedClasses.length > 0 ? <>
-                    <h2 className="text-3xl uppercase font-semibold">Mange Your Selected Classes</h2>
+                    <h2 className="text-2xl sm:text-3xl mb-5 uppercase font-bold">Mange Your Selected Classes</h2>
                     <div>
                         <div className="overflow-x-auto">
                             <table className="table">

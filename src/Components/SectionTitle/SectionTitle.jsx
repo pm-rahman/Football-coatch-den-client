@@ -1,8 +1,8 @@
 const SectionTitle = ({title,subTitle}) => {
     return (
         <div className="mx-auto text-center">
-            <h2 className="text-2xl mb-1 uppercase font-semibold">{title}</h2>
-            <p className="uppercase text-sm md:text-base font-semibold text-[#e84c3d]">{subTitle}</p>
+            <h2 className="text-2xl sm:text-3xl mb-2 uppercase font-bold">{title}</h2>
+            <p className="text-sm md:w-3/4 lg:w-1/2 md:mx-auto md:text-base font-semibold text-[#bbacca]">{subTitle}</p>
         </div>
     );
 };

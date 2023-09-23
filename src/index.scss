@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+$primary-color:rgb(2,3,129);
+$dark-color:#12141D;
+$cart-bg:#1C1E2AB3;
+$secondary-color:#9b51e0;
+*{
+    color:white;
+}
+.primary_color {
+    color: $primary-color;
+}
+table, tr,td,th{
+    border: 1px solid #6d6477
+}
+td{
+    color: #bbacca;
+}
+td button, button{
+    border:none;
+}
+
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid #44047f;
+  -webkit-text-fill-color: #bbacca;
+  -webkit-box-shadow: 0 0 0px 1000px #4e0592 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input{
+    background-color: #44047f !important;   
+}
+input:focus{
+    outline: none;
+    background-color: #4e0592 !important;
+}
+
+/* active link */
+a.active {
+    background-color: transparent;
+    color: $secondary-color;
+    font-weight: 600;
+}
+/* bg */
+.bg-color{
+    background-color: #12141D;
+}
+.cart-bg{
+    background-image: linear-gradient(to bottom, #12141D 60%, #0e021a);
+}
+.gradient-bg{
+    background-image: linear-gradient(to bottom right, #12141D 50%, #18012d);
+}
+.gradient-t-bg{
+    background-image: linear-gradient(to top , #12141D 40%, #230341);
+}
+/* container */
+.container {
+    max-width: 1440px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width:1000px) {
+    .container {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media screen and (max-width:640px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+@media screen and (max-width:350px) {
+    .container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

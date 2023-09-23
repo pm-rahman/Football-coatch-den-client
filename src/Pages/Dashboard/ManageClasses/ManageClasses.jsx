@@ -38,7 +38,7 @@ const ManageClasses = () => {
         <div className="max-w-full">
             {
                 classes && classes.length > 0 ? <>
-                    <h2 className="text-3xl uppercase font-semibold">Mange Class</h2>
+                    <h2 className="text-2xl sm:text-3xl mb-5 uppercase font-bold">Mange Class</h2>
                     <div className="w-full overflow-x-auto">
                         <div className="mb-4">
                             <table className="table">
